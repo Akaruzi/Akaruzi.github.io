@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Akaruzi">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Akaruzi">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog,akaru,akaruzi">
+    
+    <meta name="description" content="迷っちゃた">
+    <meta name="description" content="body { text-align:justify; widows:0; orphans:0; font-family:等线; font-size:12pt }h1, h2, h3, p { margin:0pt }table { margin-top:0pt; margin-bottom:0pt }h1 { margin-top:17pt; margin-bottom:16.5pt; text-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Akazuri&#39;s Blog">
+<meta property="og:url" content="https://akaruzi.github.io/1970/01/01/dies_kj_1/index.html">
+<meta property="og:site_name" content="Akazuri&#39;s Blog">
+<meta property="og:description" content="body { text-align:justify; widows:0; orphans:0; font-family:等线; font-size:12pt }h1, h2, h3, p { margin:0pt }table { margin-top:0pt; margin-bottom:0pt }h1 { margin-top:17pt; margin-bottom:16.5pt; text-">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-10T05:18:08.397Z">
+<meta property="article:author" content="Akaruzi">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/rei_ico.png">
+    
+    <title>Akaruzi&#39;s Blog</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- Google tag (gtag.js) -->
+    
+
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress read-progress-feature"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu header-sidebar-menu-rounded">
+        
+            
+                <i class="fas fa-bars"></i>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Akaruzi's Blog</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Akaruzi&#39;s Blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name"></a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden back-top-rounded">
+        
+        
+            <i class="fas fa-chevron-up"></i>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+    
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/rei_post.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                [Untitled Post]
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">8.7k</span>阅读时长: <span class="post-count reading-time">33 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">1970/01/01</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta name="generator" content="Aspose.Words for .NET 24.9.0" /><title></title><style type="text/css">body { text-align:justify; widows:0; orphans:0; font-family:等线; font-size:12pt }h1, h2, h3, p { margin:0pt }table { margin-top:0pt; margin-bottom:0pt }h1 { margin-top:17pt; margin-bottom:16.5pt; text-align:center; page-break-inside:avoid; page-break-after:avoid; line-height:241%; widows:0; orphans:0; font-family:等线; font-size:22pt; font-weight:bold; color:#000000; -aw-style-aliases:'一级标题' }h2 { margin-top:5pt; margin-bottom:5pt; text-align:center; page-break-inside:auto; page-break-after:auto; widows:2; orphans:2; font-family:宋体; font-size:18pt; font-weight:bold; color:#000000; -aw-style-aliases:'二级标题' }h3 { margin-top:13pt; margin-bottom:13pt; text-align:justify; page-break-inside:avoid; page-break-after:avoid; line-height:173%; widows:0; orphans:0; font-family:等线; font-size:16pt; font-weight:bold; color:#000000 }.Footer { text-align:left; line-height:normal; widows:0; orphans:0; font-size:9pt; -aw-style-name:footer }.Header { text-align:center; line-height:normal; widows:0; orphans:0; font-size:9pt; -aw-style-name:header }.Title { margin-top:12pt; margin-bottom:3pt; text-align:center; line-height:normal; widows:0; orphans:0; font-family:'等线 Light'; font-size:16pt; font-weight:bold; letter-spacing:0pt; -aw-outline-level:1; -aw-style-name:title }.max-w-3xl { margin-top:5pt; margin-bottom:5pt; text-align:left; widows:2; orphans:2; font-family:宋体; font-size:12pt }.mx-auto { margin-top:5pt; margin-bottom:5pt; text-align:left; widows:2; orphans:2; font-family:宋体; font-size:12pt }.p1 { text-align:left; widows:2; orphans:2; font-family:'PingFang SC'; font-size:12pt; color:#273039 }.text-lg { margin-top:5pt; margin-bottom:5pt; text-align:left; widows:2; orphans:2; font-family:宋体; font-size:12pt }.a2 { margin-top:5pt; margin-bottom:5pt; text-align:center; widows:2; orphans:2; font-family:宋体; font-size:12pt; -aw-style-name:'吟唱' }span.Hyperlink { text-decoration:underline; color:#0563c1; -aw-style-name:hyperlink }span.Strong { font-weight:bold; -aw-style-name:strong }span.s1 { font-family:PingFangSC-Regular; font-size:12pt; font-weight:normal; font-style:normal }span.s2 { font-family:AvenirNext-Regular; font-size:12pt; font-weight:normal; font-style:normal }span.\31 { font-size:22pt; font-weight:bold; -aw-style-aliases:'一级标题 字符' }span.\32 { font-family:宋体; font-size:18pt; font-weight:bold; -aw-style-aliases:'二级标题 字符' }span.\33 { font-size:16pt; font-weight:bold }span.a1 { font-family:'等线 Light'; font-size:16pt; font-weight:bold }span.a { font-size:9pt }span.a0 { font-size:9pt }.TableGrid {  }</style></head><body><div><h1><a name="_Hlk168730945"></a>
+
+
+
+<p><a name="_Hlk168735590"><span style="font-family:宋体">神怒之日考据</span></a></h1><h1><span style="font-family:宋体">咏唱的歌剧出典部分考据</span></h1><p style="text-indent:21pt"><span style="font-family:'Times New Roman'">Dies Irae </span><span style="font-family:宋体">又被译作神怒之日，是正田崇笔下的神作万象系列的第二作。其在批评空间，</span><span style="font-family:'Times New Roman'">Bangumi</span><span style="font-family:宋体">，</span><span style="font-family:'Times New Roman'">VNDB</span><span style="font-family:宋体">等视觉小说数据库中都拥有不俗的排名，但由于正田的文本难度高，生肉难啃汉化久坑，动画暴死（作死），最终手游胎死腹中并导致游戏公司破产的缘故，而未被广大国内玩家所了解。但神怒优秀的设定和成功的人物塑造仍成为了众多二次元婆罗门（斗兽痴）心中的顶峰之作。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">关于神怒的考据，在日文区有了</span><span style="font-family:'Times New Roman'">wiki</span><span style="font-family:宋体">对神怒的各种设定进行详细的介绍，而台湾粉丝黄大仙也制作有</span><a target="_blank" rel="noopener" href="https://miko.org/~uraki/kuon/furu/explain/meisi/occult/dies_irae/dies_irae.htm" style="text-decoration:none"><span class="Hyperlink" style="font-family:'Times New Roman'; font-weight:bold">Dies irae <del>Also sprach Zarathustra</del> Fan page</span></a><span style="font-family:宋体">，同样写了丰富且详尽的考据，并提供了角色咏唱的中文翻译。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">笔者才疏学浅，鉴于前人已经完成的考据，本文将主要以咏唱的歌剧出典这个方向进行比较</span><span style="font-family:宋体; font-weight:bold">浅薄</span><span style="font-family:宋体">的考据。设定均取自</span><a target="_blank" rel="noopener" href="https://w.atwiki.jp/god14/" style="text-decoration:none"><span class="Strong" style="font-family:宋体; text-decoration:underline; color:#0000ff">正田崇作品 </span><span class="Strong" style="font-family:'Times New Roman'; text-decoration:underline; color:#0000ff">@ </span><span class="Strong" style="font-family:宋体; text-decoration:underline; color:#0000ff">ウィキ</span></a><span style="font-family:宋体">（本人渣翻可能存在不准确之处，请以日文为准），咏唱也是本人</span><span style="font-family:宋体; font-weight:bold">渣翻</span><span style="font-family:宋体">（算是对黄大仙的拙劣模仿），歌剧的德语原文出自</span><a target="_blank" rel="noopener" href="https://opera-guide.ch/en/" style="text-decoration:none"><span class="Strong" style="font-family:'Times New Roman'; text-decoration:underline; color:#0000ff">Opera Guide</span></a><span style="font-family:宋体">，中文翻译来自</span><span style="font-family:'Times New Roman'">1997</span><span style="font-family:宋体">年中国文联出版公司所出版的《瓦格纳歌剧全集》，而《罗恩格林》的翻译则是引自 </span><span style="font-family:'Times New Roman'">2000</span><span style="font-family:宋体">年世界文物出版社出版，由王昭仁所译的《华格纳：罗恩格林》。</span></p><p style="text-indent:21pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">此文仅包括瓦格纳歌剧的考据，顺序按照《尼伯龙根的指环》系列，《罗恩格林》，《帕西法尔》。不包含德沃夏克的《水仙女》（露莎卡的咏唱出典以及施莱伯引用的月亮颂），理查德</span><span style="font-family:'Times New Roman'">·</span><span style="font-family:宋体">施特劳斯的《玫瑰骑士》（穿刺公，贝中尉的咏唱出典），比较浅显的原文考据可见</span><a target="_blank" rel="noopener" href="https://diesiraefansclub.gitbook.io/di_wiki、" style="text-decoration:none"><span class="Hyperlink" style="font-family:'Times New Roman'">wiki</span></a><span style="font-family:宋体">。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="width:21pt; font-family:'Times New Roman'; display:inline-block">&#xa0;</span><span style="font-family:宋体">撰文者：</span><span style="font-family:'Times New Roman'">Akaru</span><span style="font-family:宋体">（内鬼）</span></p><p style="text-align:left; widows:2; orphans:2"><br style="page-break-before:always; clear:both" /></p><h1><ruby style="ruby-align:distribute-space"><rb><span class="Strong" style="font-family:宋体">瓦尔基莉亚</span></rb><rt><span class="Strong" style="font-family:'Arial Unicode MS'; font-size:8pt">Walküre </span></rt></ruby><span style="-aw-bookmark-end:_Hlk168730945"></span><span style="font-family:'Times New Roman'"> </span></h1><p style="text-align:center"><span style="font-family:宋体">贝雅托莉丝·基尔希爱森，称号：战乙女</span></p><p style="text-indent:21pt"><span style="font-family:宋体">魔名瓦尔基莉亚是北欧神话中的女武神瓦尔基里</span><span style="font-family:'Times New Roman'">Valkyria</span><span style="font-family:宋体">的变体，其原意为贪食尸体者。她们奉命奔波在战场上，收集战死的勇士的灵魂带往瓦尔哈拉复活，以应付诸神与巨人族的</span><span style="font-family:'Times New Roman'">“</span><span style="font-family:宋体">诸神黄昏</span><span style="font-family:'Times New Roman'">”</span><span style="font-family:宋体">的最终战。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">讽刺的是，希望拯救所有人的女武神只能为莱因哈特的魔城不断送去战奴。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>能力</span></h2><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「戦場を照らす光になりたい」</span></p><p style="text-indent:21pt"><span style="font-family:宋体">根源的渴望是“希望化作照亮战场的光”。为了不让在充满硝烟与流血的无明战场上的同伴迷失方向，愿将自身化作引导他人的光明。贝雅托莉丝怀抱的正是如此清净的愿望。</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「己の肉体を雷に変換する」</span></p><p style="text-indent:21pt"><span style="font-family:宋体">发现的能力是将“自己的肉体化作雷电”</span><span style="font-family:宋体; font-weight:bold"> </span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>女武神</span></h2><p style="text-indent:24pt; line-height:15pt"><span style="font-family:宋体">魔名女武神，亦是指向了歌剧大师，瓦格纳基于北欧神话改编的史诗歌剧，尼伯龙根的指环四部曲中的第一夜《女武神》（</span><span style="font-family:'Times New Roman'">Die Walküre</span><span style="font-family:宋体">）中的女武神，布伦希尔德。</span></p><p style="text-indent:24pt; line-height:15pt"><span style="font-family:宋体">布伦希尔德为众神之主沃坦的女儿，受到父亲的命令去保护沃坦的私生子女魏尔松兄妹齐格林德和齐格蒙德，让后者在决斗中取胜。但沃坦迫于守护婚姻之神，妻子弗里卡的压力，不得已改变了给布伦希尔德的命令，让她不再庇护齐格蒙德，转而下令让齐格蒙德死于决斗。但瓦尔松兄妹的爱情打动了布伦希尔德，勇敢的女武神违背了沃坦的命令，在决斗中用盾牌保护了齐格蒙德。被触怒的沃坦撤除了布伦希尔德女武神的身份，并打算让她沉睡在山崖上，第一个唤醒她的人将成为她的丈夫。</span></p><p style="text-indent:24pt; line-height:15pt"><span style="font-family:宋体">众女武神姐妹劝谏父亲无果，沃坦将她们赶走后，森林里只剩下了布伦希尔德与沃坦的两人。布伦希尔德躺在沃坦的脚下，开始对父亲述说自己的内心：</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><br style="page-break-before:always; clear:both" /></p><p><span style="font-family:'Times New Roman'; font-weight:bold">War es so schmählich,</span><span style="font-family:'Times New Roman'"> was ich verbrach, dass mein Verbrechen so schmählich du bestrafst?</span></p><p><span style="font-family:宋体; font-weight:bold">我作了什么，</span><span style="font-family:宋体"> 如此丢脸，</span></p><p><span style="font-family:宋体">以致你如此惩罚，不留情面？</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="0" cellpadding="0" class="TableGrid" style="width:403.75pt; border-collapse:collapse"><tr style="height:18.3pt"><td style="width:201.85pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">Wohl taugte dir nicht die tör’ge Maid,</span><br /><span style="font-family:'Times New Roman'">die staunend im Rate nicht dich verstand,</span><br /><span style="font-family:'Times New Roman'">wie mein eigner Rat nur das eine mir riet: zu lieben, was du geliebt. -</span></p></td><td style="width:180.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt; font-weight:bold">毫无疑问我这个头脑简单的女孩对你已不适宜</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">她对你的决定惊愕不已</span><span style="font-family:'Times New Roman'; font-size:12pt">,</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">难道她误解了你的旨意</span><span style="font-family:'Times New Roman'; font-size:12pt">? </span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">我自己浅薄的力只告诉我一件事</span><span style="font-family:'Times New Roman'; font-size:12pt">: </span><span style="font-family:宋体; font-size:12pt">去爱你所爱的。</span></p><p style="text-align:justify; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td></tr></table><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体">布伦希尔德解释了自己是出于对那个人（沃坦）内心真实想法的考虑，才决定违背他的命令：</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="0" cellpadding="0" class="TableGrid" style="border-collapse:collapse"><tr><td style="width:196.6pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">Der diese Liebe mir ins Herz gehaucht,</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">dem Willen, der dem Wälsung mich gesellt,</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">ihm innig vertraut, trotzt’ ich deinem Gebot.</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p><p style="text-align:justify; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td><td style="width:196.6pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">有一个人把这种情爱在我心中暗暗宜讲，</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">要我与魏尔斯结成联盟是那个人的愿望。</span></p><p style="text-align:justify; font-size:12pt"><span style="font-family:宋体; font-weight:bold">我出于对他的衷心信任，才将你的命令违抗。</span></p></td></tr></table><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体">如果真要抛弃女儿，那么希望父亲能用火焰把自己包围，这样只有最勇敢的英雄才能将她唤醒：</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="0" cellpadding="0" class="TableGrid" style="border-collapse:collapse"><tr><td style="width:196.6pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Auf dein Gebot entbrenne ein Feuer;</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">den Felsen umglühe lodernde Glut;</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">es leck’ ihre Zung’, es fresse ihr Zahn</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">den Zagen, der frech sich wagte,</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt">dem freislichen Felsen zu nahn!</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td><td style="width:196.6pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top"><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt; font-weight:bold">请你下令让火光在我的周围烧遍，</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">环绕着我沉睡其上的岩石燃起熊熊火焰，</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">火光摇曳，飞舞翩嘲，</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">任何胆小鬼只要冒失地靠近可怕的岩石边缘，</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:宋体; font-size:12pt">就会被烈火狼吞虎咽。</span></p><p style="text-align:justify; line-height:12pt"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td></tr></table></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体">终于，沃坦被女儿的勇敢所打动。他热情地转向布伦希尔德，将她从膝下扶起，感动地看着她的眼睛：</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="2" cellpadding="0" style="border-spacing:1.5pt"><tr><td style="width:194.7pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">WOTAN </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">überwältigt und tief ergriffen, wendet sich lebhhaft zu Brünnhilde, erhebt sie von den Knien und blickt ihr gerührt in das Auge</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Leb’ wohl, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">du kühnes, herrliches Kind! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Du meines Herzens heiligster Stolz!</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Leb’ wohl! Leb’ wohl! Leb’ wohl!</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">sehr leidenschaftlich</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Muss ich dich meiden, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">und darf nicht minnig </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">mein Gruss dich mehr grüssen; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">sollst du nun nicht mehr neben mir reiten, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">noch Met beim Mahl mir reichen; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">muss ich verlieren dich, die ich liebe, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">du lachende Lust meines Auges: </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">ein bräutliches Feuer soll dir nun brennen, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">wie nie einer Braut es gebrannt! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Flammende Glut umglühe den Fels; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">mit zehrenden Schrecken </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">scheuch’ es den Zagen; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">der Feige fliehe Brünnhildes Fels! – </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Denn einer nur freie die Braut, </span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">der freier als ich, der Gott!</span></p></td><td style="width:213.1pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">沃坦</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-style:italic">（被布仑希尔德说服了，并深深打动了，热情地转向她，将她从膝下扶起，感动地看着她的眼睛。） </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">再见吧，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">你这个勇敢的可爱的孩子！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">你是我心中至高无上的骄傲！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">再见了！再见了！再见了！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-style:italic">（非常痛苦地）</span><span style="font-family:宋体; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">如果我非得把你丢弃， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">不能再向你亲切地致意； </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">如果你再也不能与我并肩驱驰， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">不能伺候我的饮食；</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">如果我必须失去我疼爱的你，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">见到你时我的眼眶也曾欢乐洋滋；</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">那么，我会将一堆招亲的篝火为你点起，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">虽然这样的火堆我还从未为任何新娘安置</span><span style="font-family:宋体; font-size:12pt">。</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">熊熊的火焰将在你的岩石周围燃起。</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">狼吞虎咽的火舌将吓退那些胆小的凡夫俗子， 让儒夫们远远逃离布仑希尔德的岩石！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">只有一个人能赢得新娘，</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">那个人比我这个众神之主还要自由大胆！</span></p></td></tr></table></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体">沃坦遂用长矛在岩石上撞击三下，唤出火神娄格用火焰将山崖团团围绕：</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; font-weight:bold">Wer meines Speeres Spitze fürchtet,</span></p><p><span style="font-family:'Times New Roman'; font-weight:bold">durchschreite das Feuer nie!</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体; font-weight:bold">谁要是害怕我的矛尖，</span></p><p><span style="font-family:宋体; font-weight:bold">谁就不能穿过火圈</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><br style="page-break-before:always; clear:both" /><ruby style="ruby-align:distribute-space"><rb><span>雷速剣舞</span></rb><rt><span style="font-size:9pt">Donner Totentanz</span></rt></ruby><span class="Strong" style="font-weight:normal">·</span><ruby style="ruby-align:distribute-space"><rb><span>戦姫変生</span></rb><rt><span style="font-size:9pt">Walküre </span></rt></ruby></h2><p style="text-align:center"><span style="font-family:宋体">私が犯した罪は</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">我所犯之罪</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体">心からの信頼において あなたの命に反したこと</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">乃出自内心信赖 违逆君命尔</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体">私は愚かで あなたのお役に立てなかった</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">愚吾寡力 无以助君</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体">だからあなたの炎で包んでほしい</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">故愿以君之烈炎裹身</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体; font-style:italic">さらば　輝かしき我が子よ</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold; font-style:italic">别矣 吾光辉之子</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; font-style:italic; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体; font-style:italic">ならば如何なる花嫁にも劣らぬよう</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold; font-style:italic">愿汝有赛过一切花嫁之美</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; font-style:italic; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体; font-style:italic">最愛の炎を汝に贈ろう</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold; font-style:italic">故赠以至诚之爱 至热之炎</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体">我が槍を恐れるならば この炎を越すこと許さぬ</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">凡惧吾矛尖者 休得越过此炎</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'">Donner Totentanz――Walküre</span></p><p style="text-align:center"><span style="font-family:宋体">雷速剣舞</span><span style="font-family:微软雅黑">・</span><span style="font-family:宋体">戦姫変生</span></p><div style="border-bottom:0.75pt solid #000000; clear:both"><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">雷速剑舞·战姬变生</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center; padding-bottom:1pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><p><span style="font-family:'Times New Roman'; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt; font-size:10.5pt"><span style="font-family:宋体">在萤</span><span style="font-family:'Times New Roman'">ROOT</span><span style="font-family:宋体">，贝雅托莉丝通过作为剑鞘藏于伪枪的战雷圣剑现身，与昔日上司艾莱奥诺雷上校对决。正如这段唱词，女武神（贝雅托莉丝），决心拯救被蒙蔽内心的战父沃坦（艾莱奥诺雷）。</span></p><p style="text-indent:21pt"><span style="font-family:宋体; font-size:10.5pt; font-weight:bold">斜体部分是贝雅托莉丝和艾莱奥诺雷一起的唱词。</span><br style="page-break-before:always; clear:both" /></p><h1><ruby style="ruby-align:distribute-space"><rb><span style="font-family:宋体">芬里尔</span></rb><rt><span style="font-family:'Times New Roman'; font-size:5pt">Hróðvitnir</span></rt></ruby></h1><p style="text-align:center"><ruby style="ruby-align:distribute-space"><rb><span style="font-family:宋体">沃尔夫冈</span></rb><rt><span style="font-family:方正标雅宋_GBK; font-size:5pt">Wolfgang</span></rt></ruby><span style="font-family:'Times New Roman'"> · </span><ruby style="ruby-align:distribute-space"><rb><span style="font-family:宋体">施莱伯</span></rb><rt><span style="font-family:'思源黑體 Normal'; font-size:5pt">Schreiber</span></rt></ruby><span style="font-family:宋体">，称号：</span><ruby style="ruby-align:distribute-space"><rb><span style="font-family:宋体">恶名高彰之狼</span></rb><rt><span style="font-family:宋体; font-size:6pt">悪名高き狼</span></rt></ruby><span style="font-family:宋体">。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">古北欧语中芬里尔（</span><span style="font-family:'Times New Roman'">Fenrir</span><span style="font-family:宋体">）的异名。是北欧传说中吞噬世界的魔狼，其栖息在死与雾的世界，尼尔海姆（</span><span style="font-family:'Times New Roman'">Niflheim</span><span style="font-family:宋体">）。众神曾尝试诸多手段都难以将其束缚，而这头无法被捕获的魔狼最终却被名为格莱普尼尔的枷锁困住。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">魔名讽刺在于</span><span style="font-family:'Times New Roman'; font-weight:bold">“</span><span style="font-family:宋体; font-weight:bold">不愿被任何人所触碰、不被任何事物所束缚</span><span style="font-family:'Times New Roman'; font-weight:bold">”</span><span style="font-family:宋体">的芬里尔，施莱伯却在内心深处的渴望却是</span><span style="font-family:'Times New Roman'; font-weight:bold">“</span><span style="font-family:宋体; font-weight:bold">能被人拥抱</span><span style="font-family:'Times New Roman'; font-weight:bold">”</span><span style="font-family:宋体">。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>能力</span></h2><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「誰にも触れられたくない」</span><span style="font-family:宋体">，</span></p><p style="text-indent:21pt"><span style="font-family:宋体">根源的渴望是“不愿被任何人触及”</span></p><p style="text-indent:21pt; text-align:center; font-size:11.5pt"><span style="font-family:宋体; font-weight:bold; color:#333333; background-color:#ffffff">「どんな速度や行動であろうと必ず誰よりも速く動くことができる」</span></p><p style="text-indent:21pt"><span style="font-family:宋体">求道型的创造，发自内心的渴望得到具现化：</span><span style="font-family:宋体; font-weight:bold">不管对方以怎样的速度运动，都能以速度绝对领先，绝对回避。</span></p><p><span style="font-family:'Times New Roman'; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>吟唱</span></h2><p style="text-align:center"><span style="font-family:宋体">普通创造唱词出自</span><span style="font-family:宋体; font-weight:bold">尼伯龙根的指环</span><span style="font-family:宋体">第二夜</span><span style="font-family:宋体; font-weight:bold">《齐格弗里德》</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>齐格弗里德</span></h2><p style="text-indent:21pt"><span style="font-family:宋体">自《女武神》之后，布伦希尔德沉睡在悬崖之上，父亲沃坦为山崖四周点起烈火，只有最为勇敢的英雄才能跨过烈火唤醒女武神。齐格林德和齐格蒙德的孩子齐格弗里德被尼伯龙根人米梅养大，并在其帮助之下重新锻造了被沃坦折断的诺通剑。狡诈阴险的米梅为夺回拥有无穷魔力的指环引导齐格弗里德杀死了受指环诅咒变成巨龙的法弗纳。屠龙后的齐格弗里德却在无意间吮吸了溅到手上的龙血，并获得了听懂鸟语的能力。小鸟告诉了齐格弗里德指环和隐身盔所在之处，以及提醒他提防米梅，从而识破了米梅的阴谋并将其杀死。 </span></p><p style="text-indent:21pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">随后小鸟将齐格弗里德指引到了烈火山崖，回应其寻求妻子的愿望。齐格弗里德用诺通剑</span><span style="font-family:宋体; font-weight:bold">粉碎掉了在途中阻难的沃坦的永恒之矛</span><span style="font-family:宋体">，随后见到了被烈火所包围着沉睡的布伦希尔德。他被布伦希尔德的美貌所倾倒，</span><span style="font-family:宋体; font-weight:bold">便跨过烈火将女武神唤醒</span><span style="font-family:宋体">。苏醒的女武神告诉了齐格弗里德他的身世，并称赞其为胜利的英雄：</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><br style="page-break-before:always; clear:both" /></p><table cellspacing="2" cellpadding="0" style="border-spacing:1.5pt"><tr><td style="width:230.15pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">BRÜNNHILDE </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">im höchsten Liebesjubel wild auflachend </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">O kindischer Held! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">O herrlicher Knabe! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Du hehrster </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Taten töriger Hort! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Lachend muss ich dich lieben, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">lachend will ich erblinden, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">lachend lass uns verderben, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">lachend zugrunde gehn! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Fahr’ hin, Walhalls leuchtende Welt! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Zerfall in Staub deine stolze Burg! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Leb’ wohl, prangende Götterpracht! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">End’ in Wonne, du ewig Geschlecht!</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Zerreisst, ihr Nornen, das Runenseil! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Götterdämm’rung, dunkle herauf! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Nacht der Vernichtung, neble herein! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Mir strahlt zur Stunde Siegfrieds Stern; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">er ist mir ewig, ist mir immer, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Erb’ und Eigen, ein’ und all’: </span></p><p style="margin-top:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">leuchtende Liebe, lachender Tod!</span></p></td><td style="width:177.65pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">布仑希尔德</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">(</span><span style="font-family:宋体; font-size:12pt; font-style:italic">在极度的爱的欢呼中狂野大笑。</span><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">) </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">呵幼稚英雄！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">呵荣耀的少年！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">你崇高事业的 </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">愚笨守护！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">欢笑着我来爱你，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">欢笑着我要变盲目， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">欢笑着让我们朽腐， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">欢笑着走向毁灭！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">别了，瓦尔哈拉 光明世界！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">化为尘土 你高傲城堡！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">别了，耀眼的 神的豪华！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">终于喜悦， 你永恒族类， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">扯断，诺恩们， 那鲁能索 </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">神界黄昏 暗暗上升！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">毁灭的黑夜 昏昏趋近！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">照亮我在此刻 齐格弗里德之星 </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">他永远属于我，始终属于我， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">遗产和自身， 一和万有： </span></p><p style="margin-top:14pt; line-height:13pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">光的爱情， 欢笑的死！</span></p></td></tr></table><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:宋体">两人一同唱起了幸福的二重唱，紧紧相拥，并发誓永远相爱。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><br style="page-break-before:always; clear:both" /></h2><h2 style="margin-top:14pt; margin-bottom:14pt"><ruby style="ruby-align:distribute-space"><rb><span>死世界</span></rb><rt><span style="font-size:9pt">Niflheimr</span></rt></ruby><span style="font-family:微软雅黑">·</span><ruby style="ruby-align:distribute-space"><rb><span class="Strong">凶兽变生</span></rb><rt><span class="Strong" style="font-size:9pt">Fenriswolf</span></rt></ruby></h2><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>さらば ヴァルハラ</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">别矣 瓦尔哈拉</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>光輝に満ちた世界</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">那光辉溢彩之世界</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>聳え立つその城も 微塵となって砕けるがいい</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">城高虽刺云霄 终化碎石堆沙</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>さらば 栄華を誇る神々の栄光</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">永诀自豪之尊荣 众神之荣光</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>神々の一族も 歓びのうちに滅ぶがいい</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">诸神一族 愿以欢乐之姿 归于虚无之境</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>創造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">创造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>死世界</span><span style="font-family:微软雅黑">・</span><span>凶獣変生</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">死世界·凶兽变生</span></p><p><span style="-aw-import:ignore">&#xa0;</span></p><p style="text-align:left; widows:2; orphans:2"><br style="page-break-before:always; clear:both" /></p><h1><ruby style="ruby-align:distribute-space"><rb><span class="Strong" style="font-family:宋体">萨米耶·圣陶</span></rb><rt><span class="Strong" style="font-size:11pt">Samiel Zentaur </span></rt></ruby></h1><p style="text-align:center"><span class="Strong" style="font-family:宋体">艾莱奥诺雷 </span><span class="Strong" style="font-family:'Times New Roman'">· </span><span class="Strong" style="font-family:宋体">冯 </span><span class="Strong" style="font-family:'Times New Roman'">· </span><span class="Strong" style="font-family:宋体">维腾堡，称号：魔操砲兵</span><span style="font-family:宋体"> </span><span class="Strong" style="font-family:宋体">半魔炮手</span></p><p style="text-indent:21pt"><span style="font-family:宋体">魔名中萨米耶出自德国歌剧先驱，韦伯的歌剧《魔弹射手》（又称自由射手）。其中的萨米耶是一个拥有绝对不可躲避的魔弹，并以此魔弹来交易人类灵魂的恶魔。而</span><span style="font-family:'Times New Roman'">zentaur</span><span style="font-family:宋体">则是德语的半人马座。作为魔名是在讽刺萨米耶无论是外貌（烧毁）还是精神上，都与半人半魔（半人马）的形态无异。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">能力</span></h2><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「標的を着弾の爆発に飲み込むまで爆心地が拡がり追いかけ続ける」</span></p><p style="text-indent:21pt"><span class="Strong" style="font-family:宋体; font-weight:normal">能力是“魔弹会从爆弹中心不断扩大，并持续追踪直至目标被爆炸所吞噬”，由圣遗物极大火炮·狩猎魔王所发射的火炮，就算对方成功脱离了爆弹中心，魔弹的爆心会持续扩大至目标中弹为止。如此，所有能从地上逃生的余地均被封死，只有被炮火焚烧殆尽的下场。</span></p><p style="text-indent:21pt"><span class="Strong" style="font-family:宋体; font-weight:normal">（包括贝雅托莉丝在内的大部分黑圆桌团员都误以为这是埃莱奥诺雷的创造，但这只是她为适用于战场而故加限制，位于形成与创造的中间技，即伪创造。）</span></p><p><span style="-aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">伪创造</span></h2><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">この世で狩に勝る楽しみなどない</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; font-weight:normal">Was gleicht wohl auf Erden dem Jägervergnügen</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span style="font-weight:bold">世间焉有胜于狩猎之欢愉者</span></p><p><span style="-aw-import:ignore">&#xa0;</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">出自魔弹射手中著名的</span><span class="Strong">猎手之歌</span><span class="Strong" style="font-weight:normal">（</span><span class="Strong">第三幕，第六场猎手们的合唱</span><span class="Strong" style="font-weight:normal">）</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">真创造</span></h2><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「黄金の輝きに永劫焼かれていたい」</span></p><p style="text-indent:21pt"><span class="Strong" style="font-family:宋体; font-weight:normal">这是独抱孤高之心的埃莱奥诺雷将自己“想要永远沐浴在黄金的光辉中”这一渴望所具现化的霸道型创造。抱有对莱因哈特绝对忠心（恋心），正是追求不得才希望能永远追逐黄金的光辉。</span></p><p><span class="Strong" style="font-family:'Times New Roman'; font-weight:normal; -aw-import:ignore">&#xa0;</span></p><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「逃げ場の一切ない砲身状の結界に対象を封じ込め、内部を一分の隙間もなく炎の壁で焼き尽くす回避不能の絶対必中の攻撃を放つ」</span></p><p style="text-indent:21pt"><span class="Strong" style="font-family:宋体; font-weight:normal">能力是“将对象封印在毫无逃生余地的火炮状的结界中，在顷刻之间便能以不可回避，绝对必中的烈焰炙烤对方”</span><span style="font-family:宋体; font-weight:bold"> </span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">吟唱</span></h2><p style="text-align:center"><span class="Strong" style="font-family:宋体; font-weight:normal">唱词出自</span><span class="Strong" style="font-family:宋体">尼伯龙根的指环第三夜《诸神黄昏》</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">诸神黄昏</span></h2><p style="text-indent:21pt"><span style="font-family:宋体">自《女武神》之后，齐格弗里德把指环交给布伦希尔德作为信物，自己骑上布伦希尔德女武神时期的爱马暂时告别下山。随后来到了贡特尔王国，却遭到一心夺取指环的阿尔贝里希之子哈根的暗算。哈根向贡特尔国王兄妹，冈尔特，古特鲁尼进言，说布伦希尔德和齐格弗里德是兄妹俩的理想结婚对象，并设计让齐格弗里德喝下遗忘药酒。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">忘却前事的齐格弗里德与国王冈尔特结拜为兄弟。他穿上隐身盔变作冈尔特的样子制服了布伦希尔德，抢走指环并在清晨的浓雾中与冈尔特交换回了身份。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">哈根随后召集臣民宣布举行冈尔特与布伦希尔德和齐格弗里德与古特鲁尼的婚礼。布伦希尔德不由得怒从心来，哈根借此献媚布伦希尔德说她受到了齐格弗里德的欺骗，想要帮她复仇。布伦希尔德没有料想到哈根阴险的为人，无意间透露了齐格弗里德背部的弱点：他总是正面对敌，所以自己没有给他的后背施加祝福保护：</span></p><p style="text-indent:21pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt; text-align:center"><span style="font-family:'Times New Roman'">wich’ er dem Feind, nie reicht’ er fliehend ihm den Rücken:</span><br /><span style="font-family:'Times New Roman'">an ihm drum spart’ ich den Segen.</span></p><p style="text-indent:21pt; text-align:center"><span style="font-family:宋体">“他面对敌人从来不退让</span><span style="font-family:'Times New Roman'">, </span><span style="font-family:宋体">也决不在逃跑中把脊背朝向敌人。</span></p><p style="text-indent:21pt; text-align:center"><span style="font-family:宋体">因此省了我把祈福用在他身上”</span></p><p style="text-indent:21pt; text-align:center"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">次日在山岗上用餐时哈根让齐格弗里德饮下了恢复记忆的药酒。齐格弗里德回复记忆，开始吐露回想起的往事并说布伦希尔德是自己曾经的妻子，哈根趁机用枪刺进了他的背脊。齐格弗里德无力抵抗，在向布伦希尔德道别之后气绝身亡。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">而布伦希尔德从莱茵少女处得知了事情的原委：</span></p><table cellspacing="2" cellpadding="0" style="border-spacing:1.5pt"><tr style="height:159.65pt"><td style="width:208.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">BRÜNNHILDE </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">versinkt von neuem in die Betrachtung des Antlitzes der Leiche Siegfrieds. Ihre Mienen nehmen eine immer sanftere Verklärung an</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td><td style="width:198.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">布仑希尔德</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">（重新沉浸于对西格弗里德尸体的观察思考。她的脸上表现出愈来愈温柔的净化。）</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td></tr><tr><td style="width:208.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Wie Sonne lauter </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">strahlt mir sein Licht: </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">der Reinste war er, der mich verriet! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Die Gattin trügend, - treu dem Freunde,</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:spaces">&#xa0;</span><span style="font-family:'Times New Roman'; font-size:12pt">- von der eignen Trauten - einzig ihm teuer - schied er sich durch sein Schwert.</span></p></td><td style="width:198.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">他的光为我照射，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">就像太阳一样纯正。 </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">他原是最完美的人， 却进行出卖我的活动。</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">他欺骗妻子； 他对朋友忠诚。</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">他用他的剑 使他自己离开了 他绝无仅有的真正爱情。</span></p></td></tr><tr><td style="width:208.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Echter als er schwur keiner Eide; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">treuer als er hielt keiner Verträge; </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">lautrer als er liebte kein andrer:</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">und doch, alle Eide, alle Verträge, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">die treueste Liebe </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">trog keiner wie er! –</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold; -aw-import:spaces">&#xa0;</span><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Wisst ihr, wie das ward?</span></p></td><td style="width:198.9pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">没有人比他 宣暂更实在，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">没有人比他 守约更真诚， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">没有人比他 爱得更纯洁。</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">然而也没有人像他那样 欺骗了一切哲言， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">欺骗了一切盟约，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">欺骗了最坚贞的爱情！</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">你们可知道这是怎样形成？</span></p></td></tr><tr><td style="width:208.9pt; padding:0.75pt; vertical-align:middle"><p style="line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td><td style="vertical-align:top"></td></tr><tr style="height:0pt"><td style="width:212.65pt"></td><td style="width:202.65pt"></td></tr></table></div><br style="clear:both; mso-break-type:section-break" /><div><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">布伦希尔德取下了齐格弗里德的指环，宣称只有烈火才能净化这受到诅咒的指环</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">Verfluchter Reif! Furchtbarer Ring!</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">Dein Gold fass’ ich und geb’ es nun fort.</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">Der Wassertiefe weise Schwestern,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">des Rheines schwimmende Töchter,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">euch dank’ ich redlichen Rat.</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">Was ihr begehrt, ich geb’ es euch:</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">aus meiner Asche nehmt es zu eigen!</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt">Das Feuer, das mich verbrennt,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt">rein’ge vom Fluche den Ring!</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt">Ihr in der Flut löset ihn auf,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt">und lauter bewahrt das lichte Gold,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-family:'Times New Roman'; font-size:11pt; font-weight:normal">das euch zum Unheil geraubt.</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">可恶的指环！ 可怕的指环！</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">现在我拿起你这金指环， 把你交出去。</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">莱茵河深渊中 聪明的姐妹们，</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">游泳的莱茵河女儿们， </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">我感谢你们诚实的建议。</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">我要给你们， 你们所渴望的东西： </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">从我的骨灰中 你们把指环拿去！</span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-size:11pt">焚化我的烈火 </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-size:11pt">能清除指环上的咒语！ </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-size:11pt">你们在洪水中 把诅咒洗掉， </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span class="Strong" style="font-size:11pt">保留住光亮耀眼的， 纯粹黄金</span><span style="font-size:11pt"> </span></p><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; line-height:12pt"><span style="font-size:11pt">那本是你们的，不幸被盗。</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p class="mx-auto" style="margin-top:14pt; margin-bottom:14pt; font-size:11pt"><span class="Strong" style="font-family:'Times New Roman'; font-weight:normal; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">燃烧的烈火会直达天上的瓦尔哈拉之城，这将是诸神的黄昏。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="2" cellpadding="0" style="border-spacing:1.5pt"><tr><td style="width:194.7pt; padding:0.75pt; vertical-align:middle"><p class="max-w-3xl" style="margin-top:0pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'">Fliegt heim, ihr Raben!</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'">Raunt es eurem Herren,</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'">was hier am Rhein ihr gehört!</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'">An Brünnhildes Felsen fahrt vorbei! – </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; font-weight:bold">Der dort noch lodert, </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; font-weight:bold">weiset Loge nach Walhall! </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; font-weight:bold">Denn der Götter Ende dämmert nun auf. </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:0pt"><span style="font-family:'Times New Roman'; font-weight:bold">So - werf’ ich den Brand in Walhalls prangende Burg.</span></p></td><td style="width:213.1pt; padding:0.75pt; vertical-align:middle"><p class="max-w-3xl" style="margin-top:0pt; margin-bottom:14pt"><span>乌鸦呀，你们飞回家去吧！</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span>把你们在莱茵河边的见闻， </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span>都详细告诉你们的主人！</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span>你们从布仑希尔德的 山崖近旁飞行，</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-weight:bold">让还在那里燃烧的 </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-weight:bold">火神娄格返回瓦尔哈拉天宫！</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-weight:bold">因为神界的结局 现在已经临近，</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-weight:bold">所以一我要这个火把 </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:0pt"><span style="font-weight:bold">投进瓦尔哈拉天宫灿烂辉煌的塔楼里。</span></p></td></tr></table></div><br style="clear:both; mso-break-type:section-break" /><div><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div><br style="clear:both; mso-break-type:section-break" /><div><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>布伦希尔德将火炬投向柴垛，自己则跨上爱马向着灼烧齐格弗里德的烈火中跳去。此时，莱茵河泛滥，哈根试图抢回指环，却被莱茵少女拖入水底，指环物归原主，莱茵河水恢复了往日的平静。而燃起的大火则将瓦尔哈拉神殿吞噬，诸神黄昏已至。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt; text-align:justify"><br style="page-break-before:always; clear:both" /></h2><h2 style="margin-top:14pt; margin-bottom:14pt"><ruby style="ruby-align:distribute-space"><rb><span class="Strong">焦热世界</span></rb><rt><span class="Strong" style="font-family:'FOT-Comet Std B'; font-size:9pt">Muspellzheimr</span></rt></ruby><span class="Strong">·</span><ruby style="ruby-align:distribute-space"><rb><span class="Strong">激痛之剑</span></rb><rt><span class="Strong" style="font-family:'FOT-Comet Std B'; font-size:9pt; -aw-import:spaces">&#xa0;</span><span class="Strong" style="font-family:'FOT-Comet Std B'; font-size:9pt">Lævateinn </span></rt></ruby><span style="font-family:'Times New Roman'; font-weight:normal"> </span></h2><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>彼ほど真実に誓いを守った者はなく</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">未有人如彼般 守相交之誓言至坚至贞</span><span style="width:15pt; font-family:'Times New Roman'; font-weight:bold; display:inline-block">&#xa0;</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>彼ほど誠実に契約を守った者もなく</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">未有人如彼般 遵契约之精神至诚至真</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>彼ほど純粋に人を愛した者はいない</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">未有人如彼般 予他人之厚爱至纯至深</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>だが彼ほど 総ての誓いと総ての契約 総ての愛を裏切った者もまたいない</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">然亦无人如彼般 背离诸誓、诸约、诸爱 至彻至绝</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>汝ら それが理解できるか</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">汝等 可知此自何来</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>我を焦がすこの炎が 総ての穢れと総ての不浄を祓い清める</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">焦灼吾人之炽焰 可净一切之污浊</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>祓いを及ぼし 穢れを流し 熔かし解放して尊きものへ</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">以祓礼之仪 涤荡尘垢 熔断羁绊 尊贵之物予以重生涅槃</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>至高の黄金として輝かせよう</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">以至高之黄金 璀璨夺目</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>すでに神々の黄昏は始まったゆえに</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">诸神黄昏既至</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>我はこの荘厳なるヴァルハラを燃やし尽くす者となる</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">吾将身化焚尽庄严瓦尔哈拉之者</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>創造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">创造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>焦熱世界</span><span style="font-family:微软雅黑">・</span><span>激痛の剣</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">焦热世界·激痛之剑</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt"><span style="font-family:'Times New Roman'; font-weight:bold; -aw-import:ignore">&#xa0;</span></p><h1><br style="page-break-before:always; clear:both" /></h1><h1><a name="_Hlk168731357"><ruby style="ruby-align:distribute-space"><rb><span style="font-family:宋体">克里斯托夫</span><span>·</span><span style="font-family:宋体">罗恩格林</span></rb><rt><span style="font-family:'FOT-Comet Std B'; font-size:11pt">Christof Lohengrin</span></rt></ruby></a></h1><p style="text-align:center"><span style="-aw-bookmark-end:_Hlk168731357"></span><span style="font-family:宋体">瓦雷利亚·托利法，称号：神之使 （ 神を運ぶ者）</span></p><p style="text-indent:21pt"><span style="font-family:宋体">魔名中克里斯托夫出典自圣克里斯托夫，传说其曾背负耶稣渡河，故有</span><span style="font-family:'Times New Roman'">“</span><span style="font-family:宋体">负神者</span><span style="font-family:'Times New Roman'">”</span><span style="font-family:宋体">的称号。在《黄金传奇》中有记载到圣克里斯托夫立志侍奉最强大的君王，甚至侍奉过魔鬼。</span></p><p style="text-indent:21pt"><span style="font-family:宋体">而</span><span style="font-family:'Times New Roman'">Lohengrin</span><span style="font-family:宋体">则出自瓦格纳歌剧《罗恩格林》中守护圣杯的天鹅骑士，帕西法尔之子。 瓦雷利亚肩负着着让莱因哈特降临的职责，亦可被看为守护莱因哈特（圣杯）的骑士。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>能力</span></h2><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-align:center; line-height:14pt"><span class="Strong">「己が知る究極の器</span><span class="Strong" style="font-family:'Times New Roman'">(</span><span class="Strong">ラインハルト</span><span class="Strong" style="font-family:'Times New Roman'">)</span><span class="Strong">になりたい」</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt; text-align:center; line-height:14pt"><span>根源的渴望是“想拥有已知的究极的器量（莱因哈特）”</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt; line-height:14pt"><span>托利法苦于能够听取万物心声的异能，对眼见孩子遭到屠戮而无能为力的自己厌恶，绝望。从而怀抱着否定自身想要成为别人的变身愿望。为了绝不再次失去心爱之人而渴求着极致的力量，想变成卑小己身所知的完美存在——</span><span style="font-weight:bold">海德里希</span><span>，正是如此自爱的渴望。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt; text-align:center; line-height:14pt"><span style="font-weight:bold">「城から聖槍を限定召喚する」</span></p><p style="text-indent:21pt; line-height:14pt"><span style="font-family:宋体">发现的能力为“从魔城限定召唤圣枪”。在黄金化（莱因哈特化）的同时，将自身化作一道魔城的门户。托利法能从胸前展开的魔法阵射出闪耀着黄金光辉，伴随神气的圣枪。</span></p><p style="text-indent:21pt; line-height:14pt"><span style="font-family:宋体">本来只能是莱因哈特才能使用的圣枪，通过“成为莱因哈特（故能使用圣枪）”的狂信具现化，使得托利法能够在一定时间内操纵圣枪。但这并不意味着可以自由地使用，只能够将召唤的圣枪当作箭矢一般射出。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>吟唱</span></h2><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-align:center"><span class="Strong">出自瓦格纳歌剧《罗恩格林》第三幕</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">罗恩格林</span></h2><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>罗恩格林为帕西法尔之子，受到圣杯指示，去帮助布拉班特公国遭人陷害而承蒙冤屈的公爵之女，埃尔莎参加审判决斗。他身披银甲，</span><span class="bg-yellow-100">腰悬一双金色角笛，手持着宝剑，乘着天鹅所拉的小船出现</span><span>。决斗之前罗恩格林要求埃尔莎承诺不要询问他的名字。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-align:center"><span class="Strong" style="font-family:'Times New Roman'">“woher ich kam der Fahrt, noch wie mein Nam’ und Art”</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-align:center"><span class="Strong">不要询问我来自何方，我的名字和身份</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>埃尔莎答应条件，罗恩格林为她赢得了决斗，随后两人按约结成夫妇。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>但在新婚之际，埃尔莎受到恶人挑拨打破了誓约向罗恩格林询问了他的真名。由于圣杯的约束，罗恩格林不得不离开埃尔莎。</span><span class="bg-yellow-100">在临走之前他将自己的宝剑，指环，号角交给了爱妻</span><span>。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="2" cellpadding="0" style="width:100%; border-spacing:1.5pt"><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">hatt’ ich als Zeuge deines Glücks ersehnt!Dann kehrte, selig in des Grals Geleite, dein Bruder wieder, den du tot gewähnt. </span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体">作爲你幸福的目擊者伴你度過一整年！然後你以爲已經死去的兄弟就會重新回來，他現在正幸福地擔任聖杯的隨從。</span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(Alle drücken ihre lebhafte Überraschung aus. Lohengrin überreichi Elsa sein Horn, sein Schwert und seinen Ring.) </span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(</span><span style="font-family:宋体">所有的人都顥出驚訝的神色。羅恩格林把他的號角、 劍和戒指遞給埃霣莎。）</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">Kommt er dann heim, wenn ich ihm fern im Leben,</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体">當我遠離而去的時候他就會回轉家園，</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">dies Horn, dies Schwert, den Ring sollst du ihm geben. </span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体; font-weight:bold">你把這號角、劍和戒指 轉交給他。</span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">Dies Horn soll in Gefahr ihm Hilfe schenken,</span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">in wildem Kampf dies Schwert ihm Sieg verleiht; </span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">doch bei dem Ringe soll er mein gedenken, </span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; font-weight:bold">der einst auch dich aus Schmach und Not befreit! </span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体; font-weight:bold">這號角將在危險的時刻有助於他，</span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体; font-weight:bold">在激烈的戰鬥中，這劍會帶給他勝利； </span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体; font-weight:bold">而這戒指將使他想起我，</span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体; font-weight:bold">這也曾使你從羞恥和災難中獲得解救！</span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(Während er Elsa, die keines Ausdrucks mächtig ist. wiederholt küßt.) </span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(</span><span style="font-family:宋体">他一再吻埃爾莎，但她卻依舊處於木然的狀態。）</span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">Leb wohl! Leb wohl! Leb wohl, mein süßes Weib! </span></p><p style="margin-top:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体">再見！再見！再見了，我的愛妻！</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">Leb wohl! Mir zürnt der Gral, wenn ich noch bleib!Leb wohl, leb wohl!</span></p><p style="margin-top:14pt; margin-bottom:14pt; widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'; -aw-import:spaces">&#xa0;</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:宋体">再見！如果我依舊留在這裡，聖杯就會生氣！再見，再見！</span></p></td></tr><tr><td style="width:54.06%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(Elsa hat sich krampßiaft an ihm festgehalten; endlich verläßt sie die Kraft, sie sinkt ihren Frauen in die Arme, denen sie Lohengrin übergibt, wonach dieser schnell dem Ufer zueilt.)</span></p></td><td style="width:44.84%; padding:0.75pt; vertical-align:middle"><p style="widows:2; orphans:2; font-size:12pt"><span style="font-family:'Times New Roman'">(</span><span style="font-family:宋体">埃爾莎拼死地抓住羅恩格林；终於力不能支她倒在衆婦女的懷抱中。羅恩格林趁勢把她交給婦女們，然後 急忙快步奔向岸邊。）</span></p></td></tr></table><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">这时天鹅再次载着小船出现，并由一只鸽子牵引，载着罗恩格林回归天国。埃尔莎后悔不已，因为伤心过度同样魂归天国。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><ruby style="ruby-align:distribute-space"><rb><span class="Strong">神世界</span></rb><rt><span class="Strong" style="font-size:9pt">Vanaheimr</span></rt></ruby><span class="Strong">·翔矣 </span><ruby style="ruby-align:distribute-space"><rb><span class="Strong">化为黄金之白鸟骑士</span></rb><rt><span class="Strong" style="font-size:9pt">――Goldene Schwan Lohe</span></rt></ruby></h2><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>親愛なる白鳥よ</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">吾爱之白鸟兮</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この角笛とこの剣と 指輪を彼に与えたまえ</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">以此角笛、利剑与环指 赐之彼人</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この角笛は危険に際して救いをもたらし</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">角笛可警跸中拯厄</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この剣は恐怖の修羅場で勝利を与える物なれど</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">利剑于惧场中取胜</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この指輪はかつておまえを恥辱と苦しみから救い出した</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">此环指曾救汝于羞痛</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この私のことをゴットフリートが偲ぶよすがとなればいい</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">愿作哥特弗里德念吾之物</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong" style="font-weight:normal">創造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">创造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>神世界へ 翔けよ黄金化する白鳥の騎士</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">神世界</span><span class="Strong" style="font-family:'Times New Roman'">·</span><span class="Strong">翔矣 化为黄金之白鸟骑士</span></p><h1><a name="_Hlk168731382"><ruby style="ruby-align:distribute-space"><rb><span class="Strong" style="font-family:宋体">盖茨·冯·贝尔里辛根</span></rb><rt><span class="Strong" style="font-family:'FOT-Comet Std B'; font-size:9pt">Göetz von Berlichingen</span></rt></ruby></a></h1><p style="text-align:center"><span style="-aw-bookmark-end:_Hlk168731382"></span><span class="Strong" style="font-family:宋体">盖茨</span><span class="Strong" style="font-family:'Times New Roman'">·</span><span class="Strong" style="font-family:宋体">冯</span><span class="Strong" style="font-family:'Times New Roman'">·</span><span class="Strong" style="font-family:宋体">贝尔里辛根（称号：鋼鉄の腕</span><span style="font-family:宋体"> </span><span class="Strong" style="font-family:宋体">钢铁之腕）</span></p><p style="text-indent:21pt"><span style="font-family:宋体">出自歌德剧作《铁手之</span><span style="font-family:'Times New Roman'">Götz von Berlichingen</span><span style="font-family:宋体">》中拥有两只机械义肢的德意志骑士，格茨</span><span style="font-family:'Times New Roman'">·</span><span style="font-family:宋体">冯</span><span style="font-family:'Times New Roman'">·</span><span style="font-family:宋体">贝利欣根（铁腕盖茨）。在史实中贝尔里辛根是一个不得已而战的人，在生命的最后时刻被人软禁了起来，为了换取自由而被迫签署一份违背自己所愿的契约书，其追求自由而战斗的方式正与马基那相似。 </span></p><p style="text-indent:21pt"><span style="font-family:宋体">此名讽刺着以魔名作为本名使用的马基那渴求着一个圆满的结局，但以拉丁语</span><span style="font-family:'Times New Roman'">“Deus ex machina”</span><span style="font-family:宋体">机械降神为名的人总是不可能得到好的结局。</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>能力</span></h2><p style="text-align:center"><span style="font-family:宋体; font-weight:bold">「唯一無二の死によって、己としての生を終えたい」</span></p><p style="text-indent:21pt"><span style="font-family:宋体">马基那根源的渴望是“想以唯一无二的死亡结束自己的生命”。正是只有一次生命才沉重，珍贵。尽管如此，马基那被人非己愿地反复复生，被剥夺了唯一无二的死亡，从而诞生了想要夺回的渴望。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt; text-align:center"><span style="font-weight:bold">「拳に触れたものを一撃で粉砕する」</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>发现的能力是“粉碎任何被铁拳触及的事物”。将自身的存在化为死亡的实体，给予触及铁拳的一切以死亡。凡是诞生之物（拉开序幕），不论事物性质，就算是概念也能以历史意义地强制终结（落幕）。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>在这种状态下马基那的铁拳可以破坏不论生物，器物，知识亦或是概念等同地包括在内的时间，积累起来的故事，以及作为进程的历史本身。就算是诞生顷刻，也可以粉碎其历史。</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-align:center"><span style="font-weight:bold">「幕引きの一撃」</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>以故，不可防御，字面意思上的一击必杀，被称为“落幕的一击”。传颂于人界的英雄谭。正是因为以主角的死亡作为结局，故事才得以闪耀。也就是说，以绝对的死亡作为终焉。发动此创造时的马基那成为了拥有自主意识的机械降神（</span><span style="font-family:'Times New Roman'">Deus ex machina</span><span>），凡是触碰之物都会被予以终结。</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-align:left; widows:2; orphans:2"><br style="page-break-before:always; clear:both" /></p><h2 style="margin-top:14pt; margin-bottom:14pt"><span>帕西法尔</span></h2><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>阿姆佛塔斯作为圣杯王国的国王在讨伐通过女色令圣杯骑士堕落的邪恶之源魔法花园的时候，陷入昆德莉的诱惑之中而被克灵索尔夺走圣矛，并以圣矛刺伤，留下了无法治愈的伤口。而由于阿姆佛塔斯获得了圣杯的祝福，自身无法死去。 </span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt; text-align:center"><span style="font-family:'Times New Roman'; font-weight:bold">(Die Wundeist’s, die niesichschliessen will)</span></p><p class="max-w-3xl" style="margin-top:14pt; margin-bottom:14pt; text-indent:21pt"><span>在第三幕中阿姆佛塔斯无法忍受身体上的痛苦，拒绝举行圣杯仪式，一心渴望着死亡。圣杯骑士们因为吃不到圣餐，力量也随之枯竭。老国王提图雷尔因此而死，阿姆佛塔斯承诺为此举行最后一次圣餐，但到了仪式前，阿姆佛塔斯却又不愿意主持仪式了，再次祈求他的父亲：</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><table cellspacing="2" cellpadding="0" style="border-spacing:1.5pt"><tr><td style="width:216pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Tod! Sterben …</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Einz’ge Gnade!</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Die schreckliche Wunde, das Gift,</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">ersterbe,</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">das es zernagt, erstarre das Herz!</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Mein Vater! Dich ruf ich – </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">rufe du ihm es zu: </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">»Erlöser, gib meinem Sohne Ruh!« </span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td><td style="width:191.8pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">丧生！一死去！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">这是唯一的拎悯！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">去除我可怕的创伤，毒瘤，</span><span style="font-family:宋体; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">它毒害我的心，使心麻木！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">我的父亲！我呼唤着你，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">我恳请你呼唤他：</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">“</span><span style="font-family:宋体; font-size:12pt">救世主，让我儿子安息！</span><span style="font-family:'Times New Roman'; font-size:12pt">”</span></p></td></tr><tr><td style="width:216pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">DIE RITTER </span><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">drängen sich näher an </span><span style="font-family:'Times New Roman'; font-size:12pt">Amfortas heran </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Enthülle den Gral! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Walte des Amtes! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Dich mahnet dein Vater: </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">du musst, du musst! </span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; -aw-import:ignore">&#xa0;</span></p></td><td style="width:191.8pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">众武士 </span><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">(</span><span style="font-family:宋体; font-size:12pt; font-style:italic">向阿姆佛塔斯靠近。</span><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">) </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">揭开圣杯！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">尽职尽责！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">你的父亲告誡你： </span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">你必须这样做！</span></p></td></tr><tr><td style="width:216pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">AMFORTAS springt in wütender</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">Verzweiflung auf und stürzt sich unter die zurückweichenden Ritter</span></p></td><td style="width:191.8pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-style:italic">阿姆佛塔斯 在愤怒的绝望中一跃而起，</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-style:italic">冲到往后退的武士当中。</span></p></td></tr><tr><td style="width:216pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Nein! – Nicht mehr! – Ha! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Schon fühl ich den Tod mich umnachten, </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">und noch einmal sollt ich ins Leben zurück? </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Wahnsinnige! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt">Wer will mich zwingen zu leben, könnt ihr doch Tod mir nur geben? </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">Er reisst sich das Gewand auf</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Hier bin ich, – die off’ne Wunde hier!</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Das mich vergiftet, hier fliesst mein Blut:</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">heraus die Waffe! </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Taucht eure Schwerte</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">tief, tief – bis ans Heft! –</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">Auf! Ihr Helden:</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">tötet den Sünder mit seiner Qual,</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">von selbst dann leuchtet euch wohl der Gral! …</span><span style="font-family:'Times New Roman'; font-size:12pt"> </span></p></td><td style="width:191.8pt; padding:0.75pt; vertical-align:middle"><p style="margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">不！不能再执行！嗳！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">我不是已感到死在使我神志不清， </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">难道我还能再一次回生？ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">精神错乱的人啊！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">谁会强迫我活着？</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt">你们只能让我死！ </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">(</span><span style="font-family:宋体; font-size:12pt; font-style:italic">他撕开披风。</span><span style="font-family:'Times New Roman'; font-size:12pt; font-style:italic">) </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">我在这里！</span><span style="font-family:'Times New Roman'; font-size:12pt; font-weight:bold">—</span><span style="font-family:宋体; font-size:12pt; font-weight:bold">不愈合的伤口在这里！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">我的血在这里流动，它在毒害着我。</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">拔出你们的武器，把你们的剑往这里插，</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">深深地，深深地，直插至剑柄！</span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">动手吧，你们这些豪杰！</span><span style="font-family:宋体; font-size:12pt"> </span></p><p style="margin-top:14pt; margin-bottom:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">把这罪人连同他的痛苦消灭！</span></p><p style="margin-top:14pt; line-height:12pt; widows:2; orphans:2"><span style="font-family:宋体; font-size:12pt; font-weight:bold">从而让圣杯照耀着你们！</span></p></td></tr></table><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p style="text-indent:21pt"><span style="font-family:宋体">这时帕西法尔赶到，他用从克灵索尔夺回的圣枪触碰阿姆佛塔斯的伤口。伤口竟然慢慢愈合，阿姆佛塔斯终于如愿地安然离世。</span></p><p style="text-indent:21pt"><span class="Strong" style="font-weight:normal; -aw-import:ignore">&#xa0;</span></p><h2 style="margin-top:14pt; margin-bottom:14pt"><ruby style="ruby-align:distribute-space"><rb><span class="Strong">人世界</span></rb><rt><span class="Strong" style="font-size:9pt">Miðgarðr </span></rt></ruby><span class="Strong" style="font-weight:normal">·</span><ruby style="ruby-align:distribute-space"><rb><span class="Strong">终焉变生</span></rb><rt><span class="Strong" style="font-size:9pt">Völsunga Saga</span></rt></ruby></h2><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>死よ 死の幕引きこそ唯一の救い</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">死矣 死之终幕乃吾唯一之救赎</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この 毒に穢れ 蝕まれた心臓が動きを止め</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">此心 为污毒所蚀 欲永息其搏动</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>忌まわしき 毒も 傷も 跡形もなく消え去るように</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">忌恶之毒 可憎之伤 欲之消散于无形</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>この開いた傷口 癒えぬ病巣を見るがいい</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">请睹此破裂之创痍 不治之病灶</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>滴り落ちる血の雫を 全身に巡る呪詛の毒を</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">滴落之血雫 遍体之咒毒</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>武器を執れ 剣を突き刺せ</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">请执兵持剑 以刃刺其间</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>深く 深く 柄まで通れと</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">深邃 深邃 直至柄之尽处</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>さあ 騎士達よ 罪人に その苦悩もろとも止めを刺せば</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">上前 列位骑士 赐罪人以终结 斩断吾人苦痛</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>至高の光はおのずから その上に照り輝いて降りるだろう</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">至高之光 自将降临 照亮汝等</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>創造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">创造</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span>人世界</span><span style="font-family:微软雅黑">・</span><span>終焉変生</span></p><p class="a2" style="margin-top:14pt; margin-bottom:14pt"><span class="Strong">人世界·终焉变生</span></p><p><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p><p><span style="-aw-bookmark-end:_Hlk168735590"></span><span style="font-family:'Times New Roman'; -aw-import:ignore">&#xa0;</span></p></div></body></html></p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://akaruzi.github.io">Akaruzi</a>
+            <p>原文链接：<a href="https://akaruzi.github.io/1970/01/01/dies_kj_1/">https://akaruzi.github.io/1970/01/01/dies_kj_1/</a>
+            <p>发表日期：<a href="https://akaruzi.github.io/1970/01/01/dies_kj_1/">一月 1日 1970, 8:00:00 早上</a>
+            <p>更新日期：<a href="https://akaruzi.github.io/1970/01/01/dies_kj_1/">十月 10日 2024, 1:18:08 下午</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/1970/01/01/kkk_iken/" title="">
+                    <div class="nextTitle">[Untitled Post]</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:12345@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">
+
+
+
+神怒之日考据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">咏唱的歌剧出典部分考据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">瓦尔基莉亚Walküre  </span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">女武神</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">雷速剣舞Donner Totentanz·戦姫変生Walküre </span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">芬里尔Hróðvitnir</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">吟唱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">齐格弗里德</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text">死世界Niflheimr·凶兽变生Fenriswolf</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">萨米耶·圣陶Samiel Zentaur </span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">伪创造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">真创造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.4.</span> <span class="toc-text">吟唱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.5.</span> <span class="toc-text">诸神黄昏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.6.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.7.</span> <span class="toc-text">焦热世界Muspellzheimr·激痛之剑 Lævateinn  </span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">克里斯托夫·罗恩格林Christof Lohengrin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.1.</span> <span class="toc-text">能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.2.</span> <span class="toc-text">吟唱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.3.</span> <span class="toc-text">罗恩格林</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">7.4.</span> <span class="toc-text">神世界Vanaheimr·翔矣 化为黄金之白鸟骑士――Goldene Schwan Lohe</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">盖茨·冯·贝尔里辛根Göetz von Berlichingen</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.1.</span> <span class="toc-text">能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.2.</span> <span class="toc-text">帕西法尔</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">8.3.</span> <span class="toc-text">人世界Miðgarðr ·终焉变生Völsunga Saga</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 7
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2024 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/09</span>
+            <a class="archive-post-title" href="/2024/10/09/kaoju_dies/">dies浅考</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span>
+            <a class="archive-post-title" href="/2024/01/01/kkk_status/">神咒神威神乐 人物传</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span>
+            <a class="archive-post-title" href="/2024/01/01/kkk_tgm/">咲耶的信</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span>
+            <a class="archive-post-title" href="/2024/01/01/kkk_yogo/">神咒神威神乐 用语集</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2023 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/25</span>
+            <a class="archive-post-title" href="/2023/09/25/Hello-World-0/">Hello World</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 1970 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span>
+            <a class="archive-post-title" href="/1970/01/01/kkk_iken/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span>
+            <a class="archive-post-title" href="/1970/01/01/dies_kj_1/">[Untitled Post]</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="kkk">
+                <span class="iconfont-archer">&#xe606;</span>
+                kkk
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="shinza">
+                <span class="iconfont-archer">&#xe606;</span>
+                shinza
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="archive">
+                <span class="iconfont-archer">&#xe606;</span>
+                archive
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="translation">
+                <span class="iconfont-archer">&#xe606;</span>
+                translation
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="dies">
+                <span class="iconfont-archer">&#xe606;</span>
+                dies
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="kaoju">
+                <span class="iconfont-archer">&#xe606;</span>
+                kaoju
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://akaruzi.github.io",
+        root: siteMetaRoot,
+        author: "Akaruzi"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
